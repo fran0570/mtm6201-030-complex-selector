@@ -1,0 +1,262 @@
+:root {
+    /* costum property */
+    /* colors */
+    --primary-color: #551fc1;
+    --secondary-color: #212121;
+    /* spacing */
+    --paddings: 1rem;
+    --margins: 1rem;
+
+
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+
+}
+
+.container {
+    margin: var(--margins);
+}
+
+/* descendant combinator (space) */
+nav ul {
+    display: flex;
+    flex-direction: column;
+    padding-left: 0;
+    list-style-type: none;
+}
+
+nav ul li {
+    padding: 0.5rem 0;
+    border-top: 2px solid var(--primary-color);
+    /* border-bottom: 2px solid #551fc1; */
+}
+
+nav ul li a {
+    padding: 0.5rem var(--paddings);
+    /* background: #551fc1; */
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.stars {
+    margin-bottom: 1.5rem;
+}
+
+/* child combinator ( > ) */
+
+main > p {
+    font-size: 1.2rem;
+}
+
+/* to show the difference between
+main p {
+    color: red;
+} */
+
+/* adjacent combinator ( + ) */
+
+h2 + p {
+    background: var(-secondary-color);
+    color: lightgray;
+    padding: var(--paddings);
+}
+
+/* sibling combinator ( ~ ) */
+.stars span {
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+.stars span:hover ~ span {
+    opacity: 0.3;
+}
+
+/* element[attribute] => a[href] */
+/* this selector is more specific (higher specificity) then nav ul li a so will override */
+a[href] {
+    text-decoration: underline;
+}
+
+/* element[attribute="value"] => a[href="http://algonquincollege.com"] */
+a[href="#"] {
+    text-decoration: none;
+}
+
+/* element[attribute^="value"] -> starts with */
+a[href^="http"] {
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+/* element[attribute*="value"] -> contains */
+a[href*="google"] {
+    background: lavender;
+    padding: var(--paddings);
+    margin-top: var(--margins);
+    margin-left: val(--margins);
+    margin-right: val(--margins);
+    border-left: 4px solid var(--primary-color);
+
+    display: block;
+    width: calc(100% - 4rem - 4px);
+    /* unfortunitly this below doesn't seem to work (maybe their a way somehow) */
+    /* width: calc(100% - margin-left - margin-right - border-left); */
+
+}
+
+/* element[attribute$="value"] -> ends with */
+a[href$=".pdf"] {
+    background: var(--primary-color);
+    color: white;
+    padding: var(--paddings);
+    margin-top: var(--margins);
+    margin-bottom: var(--margins);
+    display: block;
+    max-width: 15rem;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: 3px 3px 0 var(-secondary-color);
+}
+
+/* :link :visited :hover :active */
+/* make sure to write these in this order top to bottom and write all of them even if not used to avoid problems */
+/*  :link {}
+    :visited {}
+    :hover {}
+    :active {} */
+main a:link {
+    font-weight: normal;
+}
+main a:visited {
+    color: crimson;
+}
+main a:hover {
+    font-weight: bold;
+}
+main a:active {
+    font-size: 1.3rem;
+}
+
+/* :focus state style normally added on inputs */
+form {
+    margin-top: 2rem;
+}
+
+/* using the attribute selector here and focus state */
+input[type="text"]:focus {
+    border: 2px solid var(--primary-color);
+}
+
+/* position related states selecting */
+/* nth-child */
+main p:nth-child(3) {
+    color: red;
+}
+
+nav ul li:last-child {
+    border-bottom: 2px solid var(--primary-color);
+}
+
+/* nav ul li:nth-child(even) {
+    background: rgb(0, 0, 255);
+}
+
+nav ul li:nth-child(odd) {
+    background-color: lavender;
+}
+
+nav ul li:nth-child(2n+1) {
+    background: green;
+} */
+
+/* form related states:
+:required, :optional, :valid,
+:invalid, :read-only  */
+/* :required */
+input:required {
+    border: 2px solid red;
+}
+
+/* :optional */
+input:optional {
+    border: 2px solid var(--primary-color);
+}
+
+/* :valid */
+input:valid {
+    background: lightgreen;
+    color: darkgreen;
+}
+
+/* :invalid */
+input:invalid {
+    background: lightpink;
+    color: crimson;
+}
+
+/* :read-only */
+input:read-only {
+    background: var(--primary-color);
+}
+
+/* pseudo element */
+
+/* ::after */
+a[href$=".pdf"]::after {
+    /* using a CSS entity = a symbole */
+    content: "\2193";
+    font-size: 1.3rem;
+    padding-left: 0.5rem;
+}
+
+/* ::first-letter */
+h2 + p::first-letter {
+    float: left;
+    font-size: 2.5rem;
+    padding-right: 0.3rem;
+    color: white;
+}
+
+/* ::first-line */
+h2 + p::first-line {
+    color: white;
+    text-decoration: underline;
+}
+
+/* ::placeholder */
+/* this will select all placeholder  */
+::placeholder {
+    color: var(--primary-color);
+    opacity: 0.6;
+}
+
+/* ::selection */
+/* this will select all selection */
+::selection {
+    background: var(--primary-color);
+    color: white;
+}
+
+/* Media Queries */
+@media screen and (min-width: 768px) {
+    .container {
+        max-width: 43rem;
+        margin: 0 auto;
+    }
+    nav ul {
+        flex-direction: row;
+        background: var(--primary-color);
+    }
+
+    nav ul li {
+        border: none;
+    }
+
+    nav ul li a {
+        background: var(--primary-color);
+        color: white;
+    }
+}
